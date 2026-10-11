@@ -5,8 +5,8 @@
  * (https://github.com/imputnet/cobalt) and put its URL + key here.
  */
 window.GRABLY = {
-  apiEndpoint: "https://rue-cobalt.xenon.zone",
-  apiKey: "", // optional: Authorization: Api-Key <key>
+  apiEndpoint: "https://cobalt-relay-production.up.railway.app",
+  apiKey: "d5b54b26-b43b-43e5-9dec-8ef5361732d0", // private relay key (rate-limited)
 
   /* ADS — paste your ad network's HTML/script snippet as a string.
    * Leave empty ("") to show a quiet placeholder box instead. */
