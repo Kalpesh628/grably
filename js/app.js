@@ -172,7 +172,7 @@
   /* ads */
   function renderAds() {
     var ads = (CFG.ads || {});
-    [["adLeaderboard", ads.leaderboard], ["adIncontent", ads.incontent], ["adSticky", ads.sticky]].forEach(function (pair) {
+    [["adLeaderboard", ads.leaderboard], ["adIncontent", ads.incontent], ["adIncontent2", ads.incontent2], ["adSticky", ads.sticky]].forEach(function (pair) {
       var el = document.getElementById(pair[0]);
       if (el && pair[1]) { el.innerHTML = pair[1]; el.classList.remove("ad-box"); }
     });

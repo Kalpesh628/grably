@@ -13,6 +13,7 @@ window.GRABLY = {
   ads: {
     leaderboard: "",
     incontent: "",
+    incontent2: "",
     sticky: "",
 
     /* AGGRESSIVE (snapyt-style): first click anywhere opens this URL in a new
