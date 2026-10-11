@@ -240,7 +240,28 @@
     if (s) s.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
+  /* service status pill — pings the relay root (no auth needed) */
+  function checkStatus() {
+    var pill = document.getElementById("statusPill");
+    var txt = document.getElementById("statusPillText");
+    if (!pill || !txt) return;
+    var done = false;
+    function setOk(ok) {
+      if (done) return; done = true;
+      pill.classList.add(ok ? "ok" : "bad");
+      txt.textContent = ok ? "operational" : "degraded — retry soon";
+    }
+    try {
+      var ctrl = new AbortController();
+      var to = setTimeout(function () { try { ctrl.abort(); } catch (e) {} setOk(false); }, 9000);
+      fetch((CFG.apiEndpoint || "").replace(/\/$/, "") + "/", { signal: ctrl.signal, mode: "cors" })
+        .then(function (r) { clearTimeout(to); setOk(!!(r && r.ok)); })
+        .catch(function () { clearTimeout(to); setOk(false); });
+    } catch (e) { setOk(false); }
+  }
+
   buildTicker();
   renderAds();
   initReveal();
+  checkStatus();
 })();

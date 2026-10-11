@@ -379,3 +379,44 @@ button { font: inherit; cursor: pointer; }
   .ticker__track { animation: none; }
   .rv { opacity: 1; transform: none; }
 }
+
+/* ---- service status pill (SEO: trust signal) ---- */
+.status-pill { display:inline-flex; align-items:center; gap:.45rem; font-family:var(--font-display); font-size:.7rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--color-muted); border:1px solid var(--color-rule); border-radius:999px; padding:.38rem .75rem; background:rgba(10,12,14,.6); white-space:nowrap; }
+.status-pill i { width:.5rem; height:.5rem; border-radius:50%; background:var(--color-warn); flex:none; }
+.status-pill.ok { color:var(--color-accent); border-color:rgba(184,255,41,.35); }
+.status-pill.ok i { background:var(--color-accent); box-shadow:0 0 10px var(--color-accent); animation:statuspulse 2.2s ease-in-out infinite; }
+.status-pill.bad { color:var(--color-danger); border-color:rgba(255,92,92,.4); }
+.status-pill.bad i { background:var(--color-danger); }
+@keyframes statuspulse { 50% { opacity:.35; } }
+@media (max-width:640px){ .status-pill{ display:none; } }
+
+/* ---- privacy trust strip ---- */
+.trust-strip { display:flex; align-items:flex-start; gap:.65rem; margin-top:var(--space-md); padding:.8rem 1rem; border:1px dashed rgba(184,255,41,.35); border-radius:var(--radius-md); font-size:.84rem; line-height:1.5; color:var(--color-muted); background:rgba(184,255,41,.03); }
+.trust-strip .tick { color:var(--color-accent); font-family:var(--font-display); font-weight:800; flex:none; }
+.trust-strip b { color:var(--color-ink); }
+
+/* ---- scroll cue (false-bottom guardrail) ---- */
+.scroll-cue { display:flex; flex-direction:column; align-items:center; gap:.3rem; margin-top:var(--space-xl); color:var(--color-faint); font-family:var(--font-display); font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; }
+.scroll-cue svg { width:18px; height:18px; stroke:var(--color-accent); animation:cuebob 1.8s ease-in-out infinite; }
+@keyframes cuebob { 50% { transform:translateY(6px); } }
+
+/* ---- terms section ---- */
+.terms-grid { display:grid; gap:var(--space-md); grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin-top:var(--space-lg); }
+.term { border:1px solid var(--color-rule); border-radius:var(--radius-md); padding:var(--space-md); background:var(--color-card); }
+.term b { display:block; font-family:var(--font-display); font-size:.8rem; letter-spacing:.06em; text-transform:uppercase; color:var(--color-accent); margin-bottom:.4rem; }
+.term p { font-size:.85rem; color:var(--color-muted); line-height:1.55; margin:0; }
+
+/* ---- landing pages ---- */
+.lp-hero { padding:calc(var(--space-3xl) + var(--space-lg)) var(--page-gutter) var(--space-2xl); max-width:62rem; margin:0 auto; }
+.lp-hero h1 { font-family:var(--font-display); font-weight:800; font-size:clamp(1.9rem,5vw,3.2rem); line-height:1.08; letter-spacing:-.01em; margin:.8rem 0 1rem; }
+.lp-hero h1 .accent { color:var(--color-accent); }
+.lp-lead { color:var(--color-muted); font-size:1.02rem; line-height:1.65; max-width:56ch; }
+.lp-cta-row { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:var(--space-lg); }
+.btn-solid { display:inline-flex; align-items:center; gap:.5rem; background:var(--color-accent); color:var(--color-on-accent); font-family:var(--font-display); font-weight:800; font-size:.9rem; padding:.85rem 1.4rem; border-radius:var(--radius-md); text-decoration:none; }
+.btn-solid:hover { filter:brightness(1.08); }
+.lp-grid { display:grid; gap:var(--space-md); grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); margin-top:var(--space-xl); }
+.lp-card { border:1px solid var(--color-rule); border-radius:var(--radius-md); padding:var(--space-md); background:var(--color-card); }
+.lp-card h2, .lp-card h3 { font-family:var(--font-display); font-size:.95rem; margin:0 0 .45rem; color:var(--color-ink); }
+.lp-card p { font-size:.87rem; color:var(--color-muted); line-height:1.6; margin:0; }
+.lp-links { margin-top:var(--space-2xl); padding-top:var(--space-lg); border-top:1px solid var(--color-rule); display:flex; flex-wrap:wrap; gap:.6rem 1.4rem; font-size:.86rem; }
+.lp-links a { color:var(--color-accent); font-family:var(--font-display); }

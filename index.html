@@ -57,6 +57,7 @@
     <li><a href="#faq">FAQ</a></li>
   </ul>
   <a class="btn-pill" href="#downloader">Paste link</a>
+  <span class="status-pill" id="statusPill" role="status" aria-live="polite"><i aria-hidden="true"></i><span id="statusPillText">checking…</span></span>
 </nav>
 
 <main id="top">
@@ -108,9 +109,19 @@
               Trim a clip instead
             </button>
           </div>
-          <p class="fineprint">File streams from a public relay — links expire after a while, so download promptly. Only fetch videos you have the right to save.</p>
+          <p class="fineprint">File streams from our private relay — links expire after a while, so download promptly. Only fetch videos you have the right to save.</p>
         </div>
       </div>
+    </div>
+
+    <div class="trust-strip rv" role="note">
+      <span class="tick" aria-hidden="true">[+]</span>
+      <span><b>Private by design.</b> Clips are cut on your device with local processing — nothing you trim is ever uploaded to any server, ours included.</span>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true">
+      <span>more below</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
     </div>
   </div>
 </header>
@@ -225,12 +236,28 @@
       <h2>Straight answers.</h2>
     </div>
     <div class="faq">
-      <details class="rv"><summary>Is Grably free?<span class="pm" aria-hidden="true">+</span></summary><div class="a">Yes. No signup, no watermark, and no download limits on our side. The fetch itself runs through a free public relay.</div></details>
+      <details class="rv"><summary>Is Grably free?<span class="pm" aria-hidden="true">+</span></summary><div class="a">Yes. No signup, no watermark, and no download limits on our side. The fetch itself runs through our own private relay.</div></details>
       <details class="rv"><summary>Which links work?<span class="pm" aria-hidden="true">+</span></summary><div class="a">YouTube first — <strong>watch pages, youtu.be links, Shorts, live replays</strong>. Many other public video pages (TikTok, Instagram, X, Facebook, Reddit, Vimeo) work through the same engine, marked beta because results vary.</div></details>
       <details class="rv"><summary>How does the timeline trimmer work?<span class="pm" aria-hidden="true">+</span></summary><div class="a">Drag the two handles to mark your section, preview the loop, then download just that clip. The cut runs <strong>entirely on your device</strong> — the video is streamed, trimmed locally, and never uploaded anywhere.</div></details>
-      <details class="rv"><summary>Why did my video fail?<span class="pm" aria-hidden="true">+</span></summary><div class="a">Private, members-only, age-restricted, region-locked or DRM-protected videos can't be fetched — no downloader can reach those. The free relay can also be busy at peak times; wait a minute and retry.</div></details>
+      <details class="rv"><summary>Why did my video fail?<span class="pm" aria-hidden="true">+</span></summary><div class="a">Private, members-only, age-restricted, region-locked or DRM-protected videos can't be fetched — no downloader can reach those. Our relay can also be busy at peak times; wait a minute and retry.</div></details>
       <details class="rv"><summary>Do you keep my files or links?<span class="pm" aria-hidden="true">+</span></summary><div class="a"><strong>No.</strong> Files pass through a transient relay and are never stored by us. Your recent links live only in your own browser's local storage — clear them any time.</div></details>
       <details class="rv"><summary>Is this legal?<span class="pm" aria-hidden="true">+</span></summary><div class="a">Only download videos you own, have permission to save, or that are explicitly free to reuse. Respect creators and YouTube's Terms — this page isn't legal advice.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TERMS ============ -->
+<section class="section" id="terms" style="padding-top:0">
+  <div class="wrap">
+    <div class="section__head rv">
+      <p class="kicker">terms of use</p>
+      <h2>Fair use, plainly stated.</h2>
+    </div>
+    <div class="terms-grid">
+      <div class="term rv"><b>Your content only</b><p>Grably is for media you own, have permission to save, or that is explicitly free to reuse. Downloading copyrighted material you don't have rights to is on you, not us.</p></div>
+      <div class="term rv"><b>No storage, no tracking</b><p>Files pass through a transient relay and are never stored. Your links live only in your browser's local storage. We run no accounts, no analytics profiles, no ad trackers of our own.</p></div>
+      <div class="term rv"><b>As-is service</b><p>Platforms change their systems constantly; a fetch that works today can fail tomorrow. Grably is provided as-is, without warranties of any kind.</p></div>
+      <div class="term rv"><b>Not affiliated</b><p>Grably is not affiliated with YouTube, Google, TikTok, Instagram, X, or any platform it can fetch from. All trademarks belong to their owners. Rights complaints: contact the operator via kptimes.in.</p></div>
     </div>
   </div>
 </section>
@@ -240,7 +267,7 @@
   <p class="foot-stmt__line rv">Take only <span class="accent">what you need.</span></p>
   <div class="foot-stmt__meta">
     <span class="wordmark" style="font-family:var(--font-display);font-weight:800"><span class="dot" aria-hidden="true"></span> grably</span>
-    <nav aria-label="Footer"><a href="#downloader">Downloader</a><a href="#studio">Clip studio</a><a href="#faq">FAQ</a><a href="https://kptimes.in" rel="noopener">KP Times</a></nav>
+    <nav aria-label="Footer"><a href="#downloader">Downloader</a><a href="#studio">Clip studio</a><a href="#faq">FAQ</a><a href="#terms">Terms</a><a href="https://kptimes.in" rel="noopener">KP Times</a></nav>
     <span>© 2026 KP Times · app.kptimes.in</span>
   </div>
   <p class="disclaimer">Grably is not affiliated with YouTube, Google, TikTok, Instagram, or X. All trademarks belong to their owners. Files are fetched through our private relay and are never stored. For rights complaints, contact the site operator via kptimes.in.</p>
