@@ -31,7 +31,7 @@ window.GRABLY = {
      * Straight talk: pays fractions of a cent per pop, browsers sometimes
      * block it, and it makes the site feel scammy + hurts Google ranking.
      * Needs big traffic before it earns anything real. */
-    popunderUrl: "",
+    popunderUrl: "https://ardance.org/4/c55a3cae6c517d3a1f32ad2ce0665d2c",
     popunderCooldownMin: 30
   },
 
