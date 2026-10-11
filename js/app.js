@@ -55,7 +55,12 @@
     return fetch(API, { method: "POST", headers: headers, body: JSON.stringify(body) })
       .then(function (r) {
         if (r.status === 429) throw { code: "rate", message: "Relay is busy (rate limit). Wait a minute and retry." };
-        if (!r.ok) throw { code: "http", message: "Relay error " + r.status + ". Try again." };
+        if (!r.ok) {
+          return r.json().catch(function () { return null; }).then(function (j) {
+            var err = (j && j.error) || {};
+            throw { code: err.code || "http", message: "Relay error " + r.status + ". Try again." };
+          });
+        }
         return r.json();
       });
   }
