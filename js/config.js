@@ -21,7 +21,11 @@ window.GRABLY = {
         html: "<script>atOptions={'key':'1cf1e90d00fef86e51c438f9c02b7a50','format':'iframe','height':250,'width':300,'params':{}};<\/script><script src=\"https://bellnewyork.org/22/1cf1e90d00fef86e51c438f9c02b7a50\"><\/script>" },
       { slot: "adIncontent2", width: 300, height: 250,
         html: "<script>atOptions={'key':'1cf1e90d00fef86e51c438f9c02b7a50','format':'iframe','height':250,'width':300,'params':{}};<\/script><script src=\"https://bellnewyork.org/22/1cf1e90d00fef86e51c438f9c02b7a50\"><\/script>" },
-      { slot: "adSticky", width: 0, height: 0, html: "" }
+      { slot: "adSticky", width: 0, height: 0, html: "" },
+      { slot: "adRail1", width: 300, height: 250,
+        html: "<script>atOptions={'key':'1cf1e90d00fef86e51c438f9c02b7a50','format':'iframe','height':250,'width':300,'params':{}};<\/script><script src=\"https://bellnewyork.org/22/1cf1e90d00fef86e51c438f9c02b7a50\"><\/script>" },
+      { slot: "adRail2", width: 300, height: 250,
+        html: "<script>atOptions={'key':'1cf1e90d00fef86e51c438f9c02b7a50','format':'iframe','height':250,'width':300,'params':{}};<\/script><script src=\"https://bellnewyork.org/22/1cf1e90d00fef86e51c438f9c02b7a50\"><\/script>" }
     ],
     popunderScript: "https://accountut.com/1/9aa580e591dcdd4628e5ed598b86f52f",
 

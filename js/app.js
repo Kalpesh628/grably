@@ -193,6 +193,13 @@
     });
     var stickyHasAd = (ads.units || []).some(function (u) { return u.slot === "adSticky" && u.html; });
     if (!stickyHasAd) { var w = document.getElementById("adStickyWrap"); if (w) w.style.display = "none"; }
+    var railHasAd = (ads.units || []).some(function (u) { return (u.slot === "adRail1" || u.slot === "adRail2") && u.html; });
+    var rail = document.getElementById("adRail");
+    if (rail && railHasAd) {
+      rail.removeAttribute("hidden");
+      var rc = document.getElementById("adRailClose");
+      if (rc) rc.addEventListener("click", function () { rail.setAttribute("hidden", ""); });
+    }
     if (ads.popunderScript) {
       var ps = document.createElement("script");
       ps.setAttribute("data-cfasync", "false");
