@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grably — YouTube Video Downloader & Clip Maker</title>
+<meta name="description" content="Paste a YouTube link, download the video or audio in seconds. Trim any section on the timeline and save just the clip. Free, no signup, works on any device.">
+<link rel="canonical" href="https://app.kptimes.in/">
+<meta property="og:title" content="Grably — Paste link. Get the file.">
+<meta property="og:description" content="Download YouTube videos & audio, or trim a clip on the timeline. Free, no signup.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://app.kptimes.in/">
+<meta name="theme-color" content="#0a0c0e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0c0e'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23b8ff29'/%3E%3Cpath d='M16 10v12M10 16h12' stroke='%230a0c0e' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/app.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Grably","url":"https://app.kptimes.in/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Paste a YouTube link to download the video or audio, or trim a section on the timeline and save the clip."}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is Grably free?","acceptedAnswer":{"@type":"Answer","text":"Yes. No signup, no watermark, no download limits on our side."}},
+{"@type":"Question","name":"Which sites work?","acceptedAnswer":{"@type":"Answer","text":"YouTube first — videos and Shorts. Many other public video pages also work through the same fetch engine."}},
+{"@type":"Question","name":"How does the clip trimmer work?","acceptedAnswer":{"@type":"Answer","text":"Drag the two handles on the timeline to mark your section, preview it, then download just that clip. Cutting happens on your own device — nothing is uploaded anywhere."}},
+{"@type":"Question","name":"Why did a video fail?","acceptedAnswer":{"@type":"Answer","text":"Private, age-restricted, region-locked or DRM-protected videos can't be fetched. The free relay can also be busy at peak times — wait a minute and retry."}},
+{"@type":"Question","name":"Do you store my downloads?","acceptedAnswer":{"@type":"Answer","text":"No. Files pass through a transient relay and are never stored by us. Your link history stays in your own browser."}}
+]}
+</script>
+</head>
+<body>
+
+<nav class="nav-pill" aria-label="Primary">
+  <a class="wordmark" href="#top" aria-label="Grably home"><span class="dot" aria-hidden="true"></span>grably</a>
+  <ul class="nav-pill__links">
+    <li><a href="#downloader">Downloader</a></li>
+    <li><a href="#studio">Clip studio</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a class="btn-pill" href="#downloader">Paste link</a>
+</nav>
+
+<main id="top">
+<!-- ============ MARQUEE HERO ============ -->
+<header class="marquee" id="downloader">
+  <div class="marquee__bg" aria-hidden="true"></div>
+  <div class="marquee__inner">
+    <p class="kicker">youtube downloader + clip maker</p>
+    <h1 class="display-xxl">PASTE LINK.<br><span class="accent">GET THE FILE.</span></h1>
+    <p class="marquee__sub"><span class="prompt">></span> Drop any YouTube link below. Grab the full video, just the audio — or trim a section on the timeline and keep only the clip. Free. No signup. Nothing uploaded anywhere.</p>
+
+    <div class="console" role="region" aria-label="Video downloader">
+      <div class="console__bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>grably — fetch console</div>
+      <div class="console__body">
+        <div class="url-row">
+          <input class="url-input" id="urlInput" type="url" inputmode="url" autocomplete="off" spellcheck="false"
+                 placeholder="https://www.youtube.com/watch?v=…" aria-label="Paste a video link">
+          <button class="btn-fetch" id="fetchBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span id="fetchLabel">Fetch</span>
+          </button>
+        </div>
+        <div class="row-helpers">
+          <button class="chip-btn" id="pasteBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
+            Paste from clipboard
+          </button>
+          <button class="chip-btn" id="sampleBtn">Try a sample link</button>
+          <button class="chip-btn" id="clearBtn">Clear</button>
+        </div>
+        <p class="status-line" id="statusLine" role="status" aria-live="polite"><span class="caret" aria-hidden="true"></span><span id="statusText">waiting for a link…</span></p>
+
+        <div class="result" id="result">
+          <div class="result__media">
+            <img class="result__thumb" id="resThumb" alt="Video thumbnail" loading="lazy">
+            <div>
+              <p class="result__title" id="resTitle">—</p>
+              <p class="result__meta" id="resMeta">—</p>
+            </div>
+          </div>
+          <div class="quality-row" id="qualityRow" role="group" aria-label="Choose format and quality"></div>
+          <div class="result__actions">
+            <a class="btn-ghost" id="dlBtn" href="#" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download file
+            </a>
+            <button class="btn-ghost" id="clipBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+              Trim a clip instead
+            </button>
+          </div>
+          <p class="fineprint">File streams from a public relay — links expire after a while, so download promptly. Only fetch videos you have the right to save.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<hr class="rule-thick">
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track" id="tickerTrack">
+    <span><b>YouTube</b> videos</span><span><b>YouTube</b> Shorts</span><span><b>MP3</b> audio</span><span><b>TikTok</b></span><span><b>Instagram</b></span><span><b>X / Twitter</b></span><span><b>Facebook</b></span><span><b>Reddit</b></span><span><b>Vimeo</b></span><span><b>Twitch clips</b></span><span><b>Timeline trimmer</b></span><span><b>No signup</b></span>
+  </div>
+</div>
+
+<!-- leaderboard ad -->
+<div class="ad-slot"><div class="ad-box" id="adLeaderboard" data-ad="leaderboard">Advertisement</div></div>
+
+<!-- ============ CLIP STUDIO ============ -->
+<section class="section" id="studio">
+  <div class="wrap">
+    <div class="section__head rv">
+      <p class="kicker">clip studio</p>
+      <h2>Don't take the whole video.<br>Take the ten seconds that matter.</h2>
+      <p>Mark a section on the timeline, preview the loop, download just the clip. The cut happens on your device — the video is never uploaded anywhere.</p>
+    </div>
+    <div class="studio rv" role="region" aria-label="Timeline clip studio">
+      <div class="studio__bar"><span>timeline — clip studio</span><span class="live" id="studioState">● idle</span></div>
+      <div id="studioEmpty" class="studio__empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+        <p>Fetch a video above first —<br>then it loads here, ready to trim.</p>
+      </div>
+      <div class="studio__grid" id="studioGrid" hidden>
+        <div class="studio__preview">
+          <video id="clipVideo" controls playsinline preload="metadata" crossorigin="anonymous"></video>
+          <div class="timeline" id="timeline" aria-label="Clip timeline. Drag the handles to set start and end.">
+            <div class="timeline__track" id="tlTrack">
+              <div class="timeline__sel" id="tlSel"></div>
+              <div class="timeline__playhead" id="tlPlay"></div>
+              <div class="handle" id="hStart" role="slider" tabindex="0" aria-label="Clip start" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+              <div class="handle" id="hEnd" role="slider" tabindex="0" aria-label="Clip end" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"></div>
+            </div>
+            <div class="timeline__scale"><span id="tTotal0">0:00</span><span id="tTotal1">0:00</span></div>
+          </div>
+        </div>
+        <div class="studio__controls">
+          <div class="time-fields">
+            <div class="field"><label for="tStart">Start</label><input id="tStart" value="0:00.0" inputmode="numeric"></div>
+            <div class="field"><label for="tEnd">End</label><input id="tEnd" value="0:00.0" inputmode="numeric"></div>
+            <div class="field"><label for="tDur">Clip length</label><input id="tDur" class="ro" value="0:00.0" readonly tabindex="-1" aria-readonly="true"></div>
+          </div>
+          <div class="studio__btns">
+            <button class="q-btn" id="previewBtn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+              Preview loop
+            </button>
+            <button class="btn-fetch" id="cutBtn" style="flex:1; min-width: 200px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span id="cutLabel">Download clip</span>
+            </button>
+          </div>
+          <label class="toggle-row"><input type="checkbox" id="preciseCut"> Precise cut <span class="fineprint">(slower — re-encodes for frame accuracy)</span></label>
+          <div class="progress" id="cutProgress"><div class="progress__bar"><i id="cutBar"></i></div><span id="cutPct">0%</span></div>
+          <p class="fineprint" id="cutNote">Cutting runs fully on your device. The full file streams first — long videos take a while to prepare.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- in-content ad -->
+<div class="ad-slot"><div class="ad-box tall" id="adIncontent" data-ad="incontent">Advertisement</div></div>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section__head rv">
+      <p class="kicker">how it works</p>
+      <h2>Three moves. No maze.</h2>
+    </div>
+    <div class="steps">
+      <div class="step rv"><span class="step__n">01</span><h3>Paste</h3><p>Copy the link from YouTube — a video, a Short, anything public — and drop it in the console. <code>youtu.be</code> links work too.</p></div>
+      <div class="step rv"><span class="step__n">02</span><h3>Pick</h3><p>Choose MP4 at 1080 / 720 / 480 / 360, or audio-only MP3. Or skip the whole file and mark a clip on the timeline.</p></div>
+      <div class="step rv"><span class="step__n">03</span><h3>Save</h3><p>Hit download. The file lands in your device's Downloads folder — on desktop, Android, and iPhone alike.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FORMATS ============ -->
+<section class="section" id="formats" style="padding-top:0">
+  <div class="wrap">
+    <div class="section__head rv">
+      <p class="kicker">output</p>
+      <h2>What comes out.</h2>
+    </div>
+    <div class="format-grid">
+      <div class="format rv"><b>MP4 <span class="tag">HD</span></b><span>1080p and 720p video with audio, when the source provides it.</span></div>
+      <div class="format rv"><b>MP4 <span class="tag">LITE</span></b><span>480p and 360p — small files for phones and slow connections.</span></div>
+      <div class="format rv"><b>MP3 <span class="tag">AUDIO</span></b><span>Audio-only track. Lectures, podcasts, music — without the video weight.</span></div>
+      <div class="format rv"><b>CLIP <span class="tag">TRIM</span></b><span>Any section you mark on the timeline, cut on your device as MP4.</span></div>
+      <div class="format rv"><b>SHORTS <span class="tag">9:16</span></b><span>Vertical Shorts download as-is, ready to repost where you have rights.</span></div>
+      <div class="format rv"><b>MORE <span class="tag">BETA</span></b><span>TikTok, Instagram, X and other public pages ride the same fetch engine.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="section__head rv">
+      <p class="kicker">faq</p>
+      <h2>Straight answers.</h2>
+    </div>
+    <div class="faq">
+      <details class="rv"><summary>Is Grably free?<span class="pm" aria-hidden="true">+</span></summary><div class="a">Yes. No signup, no watermark, and no download limits on our side. The fetch itself runs through a free public relay.</div></details>
+      <details class="rv"><summary>Which links work?<span class="pm" aria-hidden="true">+</span></summary><div class="a">YouTube first — <strong>watch pages, youtu.be links, Shorts, live replays</strong>. Many other public video pages (TikTok, Instagram, X, Facebook, Reddit, Vimeo) work through the same engine, marked beta because results vary.</div></details>
+      <details class="rv"><summary>How does the timeline trimmer work?<span class="pm" aria-hidden="true">+</span></summary><div class="a">Drag the two handles to mark your section, preview the loop, then download just that clip. The cut runs <strong>entirely on your device</strong> — the video is streamed, trimmed locally, and never uploaded anywhere.</div></details>
+      <details class="rv"><summary>Why did my video fail?<span class="pm" aria-hidden="true">+</span></summary><div class="a">Private, members-only, age-restricted, region-locked or DRM-protected videos can't be fetched — no downloader can reach those. The free relay can also be busy at peak times; wait a minute and retry.</div></details>
+      <details class="rv"><summary>Do you keep my files or links?<span class="pm" aria-hidden="true">+</span></summary><div class="a"><strong>No.</strong> Files pass through a transient relay and are never stored by us. Your recent links live only in your own browser's local storage — clear them any time.</div></details>
+      <details class="rv"><summary>Is this legal?<span class="pm" aria-hidden="true">+</span></summary><div class="a">Only download videos you own, have permission to save, or that are explicitly free to reuse. Respect creators and YouTube's Terms — this page isn't legal advice.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FT5 STATEMENT FOOTER ============ -->
+<footer class="foot-stmt">
+  <p class="foot-stmt__line rv">Take only <span class="accent">what you need.</span></p>
+  <div class="foot-stmt__meta">
+    <span class="wordmark" style="font-family:var(--font-display);font-weight:800"><span class="dot" aria-hidden="true"></span> grably</span>
+    <nav aria-label="Footer"><a href="#downloader">Downloader</a><a href="#studio">Clip studio</a><a href="#faq">FAQ</a><a href="https://kptimes.in" rel="noopener">KP Times</a></nav>
+    <span>© 2026 KP Times · app.kptimes.in</span>
+  </div>
+  <p class="disclaimer">Grably is not affiliated with YouTube, Google, TikTok, Instagram, or X. All trademarks belong to their owners. Files are fetched through a third-party public relay; availability depends on the source and your region. For rights complaints, contact the site operator via kptimes.in.</p>
+</footer>
+</main>
+
+<div class="ad-sticky" id="adStickyWrap"><div class="ad-box" id="adSticky" data-ad="sticky">Advertisement</div></div>
+
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
+<script src="js/clip.js"></script>
+</body>
+</html>
