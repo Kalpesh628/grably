@@ -8,13 +8,22 @@ window.GRABLY = {
   apiEndpoint: "https://cobalt-relay-production.up.railway.app",
   apiKey: "d5b54b26-b43b-43e5-9dec-8ef5361732d0", // private relay key (rate-limited)
 
-  /* ADS — paste your ad network's HTML/script snippet as a string.
-   * Leave empty ("") to show a quiet placeholder box instead. */
+  /* ADS — banner units render inside isolated iframes (their <script> codes
+   * run unmodified, no global collisions). Paste new codes as the `html`
+   * string; note the <\/script> escaping inside JS strings.
+   * popunderScript = Adsterra popunder <script> (appended to <body>, fires itself).
+   * popunderUrl = smartlink URL opened on first click (cooldown below). */
   ads: {
-    leaderboard: "",
-    incontent: "",
-    incontent2: "",
-    sticky: "",
+    units: [
+      { slot: "adLeaderboard", width: 728, height: 90,
+        html: "<script>atOptions={'key':'4105ddc1733c0b2b8fc59a608a394052','format':'iframe','height':90,'width':728,'params':{}};<\/script><script src=\"https://bellnewyork.org/22/4105ddc1733c0b2b8fc59a608a394052\"><\/script>" },
+      { slot: "adIncontent", width: 300, height: 250,
+        html: "<script>atOptions={'key':'1cf1e90d00fef86e51c438f9c02b7a50','format':'iframe','height':250,'width':300,'params':{}};<\/script><script src=\"https://bellnewyork.org/22/1cf1e90d00fef86e51c438f9c02b7a50\"><\/script>" },
+      { slot: "adIncontent2", width: 300, height: 250,
+        html: "<script>atOptions={'key':'1cf1e90d00fef86e51c438f9c02b7a50','format':'iframe','height':250,'width':300,'params':{}};<\/script><script src=\"https://bellnewyork.org/22/1cf1e90d00fef86e51c438f9c02b7a50\"><\/script>" },
+      { slot: "adSticky", width: 0, height: 0, html: "" }
+    ],
+    popunderScript: "https://accountut.com/1/9aa580e591dcdd4628e5ed598b86f52f",
 
     /* AGGRESSIVE (snapyt-style): first click anywhere opens this URL in a new
      * tab, then cools down for popunderCooldownMin minutes per visitor.

@@ -169,14 +169,36 @@
     } catch (e) {}
   }
 
-  /* ads */
+  /* ads — banner units render in isolated iframes so their scripts run
+   * exactly as pasted, with no atOptions collisions between units. */
   function renderAds() {
     var ads = (CFG.ads || {});
-    [["adLeaderboard", ads.leaderboard], ["adIncontent", ads.incontent], ["adIncontent2", ads.incontent2], ["adSticky", ads.sticky]].forEach(function (pair) {
-      var el = document.getElementById(pair[0]);
-      if (el && pair[1]) { el.innerHTML = pair[1]; el.classList.remove("ad-box"); }
+    (ads.units || []).forEach(function (u) {
+      var el = document.getElementById(u.slot);
+      if (!el) return;
+      if (!u.html) return; // keep the quiet placeholder box
+      el.innerHTML = "";
+      el.classList.remove("ad-box");
+      var f = document.createElement("iframe");
+      f.setAttribute("width", String(u.width));
+      f.setAttribute("height", String(u.height));
+      f.setAttribute("frameborder", "0");
+      f.setAttribute("scrolling", "no");
+      f.setAttribute("title", "Advertisement");
+      f.style.border = "0";
+      f.style.maxWidth = "100%";
+      f.srcdoc = "<!DOCTYPE html><html><head><meta charset=\"utf-8\"></head>" +
+        "<body style=\"margin:0;padding:0;overflow:hidden\">" + u.html + "</body></html>";
+      el.appendChild(f);
     });
-    if (!ads.sticky) { var w = document.getElementById("adStickyWrap"); if (w) w.style.display = "none"; }
+    var stickyHasAd = (ads.units || []).some(function (u) { return u.slot === "adSticky" && u.html; });
+    if (!stickyHasAd) { var w = document.getElementById("adStickyWrap"); if (w) w.style.display = "none"; }
+    if (ads.popunderScript) {
+      var ps = document.createElement("script");
+      ps.setAttribute("data-cfasync", "false");
+      ps.src = ads.popunderScript;
+      document.body.appendChild(ps);
+    }
   }
 
   /* ticker duplicate for seamless loop */
