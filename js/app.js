@@ -71,6 +71,7 @@
     var code = (err.error && err.error.code) || err.code || "";
     if (/jwt|auth|unauthorized/i.test(code)) return "Relay needs a key right now. Try again later or point Grably at your own instance (js/config.js).";
     if (/content\.parse|link|invalid|unsupported/i.test(code)) return "Couldn't read that link. Copy the full URL from the video page and retry.";
+    if (/youtube\.login/i.test(code)) return "YouTube is temporarily blocking our download server with an anti-bot check. The video itself is fine — please retry in a few minutes.";
     if (/geo|region|age|private|drm|protected|login/i.test(code)) return "That video is restricted (private, age/region-locked, or protected) — it can't be fetched.";
     if (err.message) return err.message;
     return "Fetch failed. The relay may be down — wait a bit and retry.";
